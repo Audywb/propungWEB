@@ -1,0 +1,85 @@
+{% extends "promo/layouts.html" %}
+{% load humanize %}
+{% block title %}หน้าแรก{% endblock %} 
+{% block content %}
+<section>
+    <h2 class="text-center fs-4">สินค้าแนะนำ</h2>
+    
+  <!------------------ สไลด์----------- -->
+  
+  <div class="container" style="margin-top: 2%; margin-bottom: 2%;">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide p-1 text-center bg-image" data-bs-ride="carousel">
+      
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4 "></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5 "></button>
+      </div>
+      <div class="carousel-inner" role="listbox">
+        {% for slide in slides %}
+        <!-- item -->
+            <div class="carousel-item text-center text-light mb-5 {% if forloop.first %} active{% endif %}">
+                <a href="{{slide.link}}"><img src="{{ slide.image.url }}" class="img-fluid mb-3 h-100"></a>
+            </div>
+        <!-- end item -->
+        {% endfor %}
+    </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <br>
+    <h2 class="text-center fs-4 mb-3">โปรออนไลน์สุดปัง</h2>
+    <div class="row row-cols-1 row-cols-md-4 g-4 mb-4" style="margin-top: 2%; margin-bottom: 2%;">
+      {% for recoms in recom %}
+        <!------------------- Card1------------- -->
+        <div class="col">
+            <div class="card h-100">
+              <img src="{{recoms.image.url}}" alt=" ">
+              <div class="card-body">
+                <p class="card-text">
+                  <div class="row">
+                    <div class="col-7">
+                      <img src="{{recoms.logo.url}}" class="rounded-circle" width="70">
+                    </div>
+                    <div class="col-auto mt-3">
+                      <a class="btn btn-danger" href="{{recoms.partner_link}}" role="button">คลิกเลย</a>
+                    </div>
+                  </div>
+                </p>
+                <p class="card-title">{{recoms.name|truncatechars:50}}</p>
+                  <p class="card-text">฿ {{recoms.price | intcomma}}</p>
+                  <p class="card-text ">📅 {{recoms.period}}</p>
+              </div>
+            </div>
+          </div>
+
+      {% endfor %}
+    </div>
+    <h2 class="text-center fs-4 mt-5 mb-3">สินค้าโปรโมชั่นสุดปัง</h2>
+    <div class="row row-cols-1 row-cols-md-4 g-4" style="margin-top: 2%; margin-bottom: 2%;">
+      {% for promotion in promotions %}
+        <!------------------- Card1------------- -->
+        <div class="col">
+            <div class="card h-100">
+              <img src="{{promotion.image.url}}" alt=" ">
+              <div class="card-body">
+                <h5 class="card-title"> <img src="{{promotion.logo.url}}" class="rounded-circle" width="70"></h5>
+                <p class="card-text">{{promotion.name|truncatechars:75}}</p>
+                  <p class="card-text  ">📍<a href="{{promotion.partner_link}}">ดูสาขาที่ร่วมโปรโมชั่น</a></p>
+                  <p class="card-text ">📅 {{promotion.period}}</p>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

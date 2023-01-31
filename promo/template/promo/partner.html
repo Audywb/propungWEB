@@ -1,0 +1,90 @@
+{% extends "promo/layouts.html" %}
+{% load static %}
+{% block title %}ร่วมงานกับเรา{% endblock %} 
+{% block content %}
+{% load static %}
+
+<section>
+    <div class= "col align-self-center shadow-none p-3 mb-1 bg-light rounded">
+    <div class="row row-cols-1 row-col-sm-2 row-cols-md-4 g-4 justify-content-center " >
+      <div class="card h-100 ">
+          <img
+          src="{% static 'img/pn1.jpg' %}"
+          class="card-img-top img-fluid rounded w-100 p-3"
+          width="250"
+        />
+      </div>
+      <div class="card col-md-3">
+        <div class="card-body">              
+          <br><br>
+          <h5 class="card-title">กําหนดราคาและเวลาได้อย่างอิสระ</h5>
+          <p class="card-text">คนรับหิ้วที่ร่วมงานกับโปรปัง สามารถกําหนดค่าหิ้ว ค่าส่ง ของสินค้าได้ตามความเหมาะสม
+            และสามารถกําหนดเวลาในการทํางานของตัวเองได้อย่างอิสระ</p>
+        </div>
+      </div>
+    </div>
+      <div class="row row-cols-1 row-col-sm-2 row-cols-md-4 g-4 justify-content-center ">   
+        <div class="card">
+          <div class="card-body">         
+                <br><br>
+            <h5 class="card-title">รายได้ 100%</h5>
+            <p class="card-text">โปรปังพร้อมซัพพอร์ทคนรับหิ้วในทุกๆ ขั้นตอน<br />
+              และเราไม่มีการหักเปอร์เซ็นต์ใดๆ
+              รายได้ทั้งหมดจึงเป็นของคนรับหิ้ว 100%
+           </div>
+          </div>
+          <div class="card">
+              <img
+              src="{% static 'img/pn2.jpg' %}"
+              class="card-img-top img-fluid rounded w-100 p-3"
+              width="250"
+            />
+          </div>
+        </div>
+        <div class="row row-cols-1 row-col-sm-2 row-cols-md-4 g-4 justify-content-center ">
+          <div class="card h-100 ">
+              <img
+              src="{% static 'img/pn3.jpg' %}"
+              class="card-img-top img-fluid rounded w-100 p-3"
+              width="250"
+            />
+          </div>
+          <div class="card col-md-3">
+            <div class="card-body">
+              <br><br>
+              <h5 class="card-title">เข้าถึงกลุ่มลูกค้าขนาดใหญ่</h5>
+              <p class="card-text">เว็บของเรา นั้นมีทั้งรูปแบบที่สามารถเข้าถึงได้ทั้ง โทรศัพย์มือถือ และ PC</p>
+            </div>
+          </div>
+        </div>
+          <div class="row row-cols-1 row-col-sm-2 row-cols-md-4 g-4 justify-content-center ">   
+            <div class="card">
+              <div class="card-body">              
+                <br><br>
+                <h5 class="card-title">สร้างฐานลูกค้าของตัวเอง </h5>
+                <p class="card-text">การรับหิ้ว ทําให้ลูกค้าสนใจ และไว้วางใจในตัวคนรับหิ้ว
+                  คุณจึงสามารถสร้างฐานลูกค้าประจําได้
+               </div>
+              </div>
+              <div class="card">
+                  <img
+                  src="{% static 'img/pn4.jpg' %}"
+                  class="card-img-top img-fluid rounded w-100 h-100 p-3"
+                  width="250"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if request.user.is_authenticated %}
+        <div class="d-flex justify-content-center mb-3">
+          <a class="btn btn-danger btn-lg" href="{% url 'registerParner' %}" role="button">สมัครเพื่อร่วมงานกับเรา</a>
+        </div>
+        {% else %}
+        <div class="d-flex justify-content-center mb-3">
+          <a class="btn btn-danger btn-lg" href="{% url 'login' %}" role="button">SIGN IN เพื่อสมัครเพื่อร่วมงานกับเรา</a>
+        </div>
+        {% endif %}
+       
+</section>          
+{% endblock %} 

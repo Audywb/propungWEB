@@ -1,0 +1,30 @@
+{% extends "promo/layouts.html" %}
+
+{% block title %}โปรโมชัน{% endblock %} 
+{% block content %}
+    
+  <h2 class="text-center fs-4">โปรโมชั่นแนะนำ</h2><br>
+    <!------------------ cards----------- -->
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      {% for promotion in promotions %}
+        <!------------------- Card1------------- -->
+        <div class="col">
+            <div class="card h-100">
+              <img src="{{promotion.image.url}}" alt=" ">
+              <div class="card-body">
+                <h5 class="card-title"> <img src="{{promotion.logo.url}}" class="rounded-circle" width="70"></h5>
+                <p class="card-text">{{promotion.name|truncatechars:75}}</p>
+                  <p class="card-text  ">📍<a href="{{promotion.partner_link}}">ดูสาขาที่ร่วมโปรโมชั่น</a></p>
+                  </p>
+                  <p class="card-text ">📅 {{promotion.period}}</p>
+              </div>
+            </div>
+          </div>
+
+      {% endfor %}
+    </div>
+  </div>
+
+    
+{% endblock %}

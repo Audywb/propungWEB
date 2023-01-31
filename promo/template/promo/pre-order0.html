@@ -1,0 +1,39 @@
+{% extends "promo/layouts.html" %}
+
+{% block title %}ฝากหิ้วสินค้า{% endblock %} 
+{% block content %}
+{% load humanize %}
+<section>
+      <h2 class="text-center fs-4">ฝากหิ้วสินค้า</h2>
+      <br>
+  <!------------------ class----------- -->
+  <div class="container mb-5">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <!------------------- Card------------- -->
+        {% for preorder in preorders %}
+        <div class="col">
+          <div class="card h-100">
+            <img src="{{preorder.image.url}}" class="card-img-top" alt=" " height="280">
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-6">
+                  <img src="{{preorder.logo.url}}" height="70" width="70">
+                </div>
+                <div class="col-auto mt-3">
+                  <a class="btn btn-danger" href="{{preorder.get_url}}" role="button">รายละเอียด</a>
+                </div>
+              </div>
+              <p class="card-text">{{preorder.name|truncatechars:75}}</p>
+                <p class="card-text  ">📍 {{preorder.period}}</p>
+                <p class="card-text ">฿ {{preorder.price|intcomma}}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <!-------------------------------- ----->
+    </div>
+  </div>
+</section>
+      
+{% endblock %}

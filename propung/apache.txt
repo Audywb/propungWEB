@@ -1,0 +1,103 @@
+Alias /static /home/propungadmin/propung/static
+	<Directory /home/propungadmin/propung/static>
+		Require all granted
+	</Directory>
+
+	Alias /media /home/propungadmin/propung/media
+	<Directory /home/propungadmin/propung/media>
+		Require all granted
+	</Directory>
+
+	<Directory /home/propungadmin/propung/propung>
+				<Files wsgi.py>
+			Require all granted
+		</Files>
+		</Directory>
+
+	WSGIScriptAlias / /home/propungadmin/propung/propung/wsgi.py
+	WSGIDaemonProcess django_app python-path=/home/propungadmin/propung 
+	python-home=/home/propungadmin/venv
+	WSGIProcessGroup django_app
+
+
+
+
+cd /home/firstwebadmin
+sudo chown :www-data propung/db.sqlite3
+sudo chmod 664 propung/db.sqlite3
+sudo chown :www-data propung/
+sudo chown -R :www-data propung/media
+sudo chown -R 775 propung/media
+
+
+[uwsgi]
+project = propung
+uid = propungadmin
+base = /home/propungadmin
+
+chdir = %(base)/%(project)
+home = %(base)./venv/bin/activate
+module = %(project).wsgi:application
+
+master = true
+processes = 10
+
+socket = /run/uwsgi/%(project).sock
+master-fifo = /run/uwsgi/%(project).fifo
+chown-socket = %(uid):www-data
+chmod-socket = 660
+vacuum = true
+
+logto = /var/log/uwsgi/%(project).log
+log-maxsize = 100000
+
+env LANG=en_US.utf8
+env LC_ALL=en_US.UTF-8
+env LC_LANG=en_US.UTF-8
+
+
+
+
+[Unit]
+Description=uWSGI Emperor service
+
+[Service]
+ExecStartPre=/bin/bash -c 'mkdir -p /run/uwsgi; chown administrator:www-data /run/uwsgi'
+ExecStart=/home/propungadmin/venv/bin/uwsgi --emperor /etc/uwsgi/vassals
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+server {
+    listen 80;
+
+    ssl off;
+
+    #server_name example.com;
+    charset     utf-8;
+
+    # max upload size
+    client_max_body_size 2050M;   # adjust to taste
+
+    # Django media
+    location /media  {
+        alias /home/propungadmin/propung/static/media;
+    }
+
+    location /static {
+        alias /home/propungadmin/propung/static;
+    }
+
+    # Finally, send all non-media requests to the Django server.
+    location /{
+        uwsgi_pass  unix:/run/uwsgi/propung.sock;
+        include     uwsgi_params;
+    }
+}

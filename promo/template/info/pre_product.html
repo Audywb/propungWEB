@@ -1,0 +1,61 @@
+{% extends "promo/layouts.html" %}
+{% load static %}
+{% load humanize %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/product.css' %}">
+    <script type="text/javascript" src="{% static 'js/pre.js' %}"></script>
+{% endblock %}
+{% block title %}{{product.name|truncatechars:10}}{% endblock %} 
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="card" style="background-color: #F2F4FB;">
+        <div class="row g-0">
+            <div class="col-md-6 border-end">
+                <div class="d-flex flex-column justify-content-center">
+                    <div class="main_image"> <img src="{{product.image.url}}" id="main_product_image" width="350"> </div>
+                    <div class="thumbnail_images">
+                        <ul id="thumbnail">
+                            <li><img onclick="changeImage(this)" src="{{product.image.url}}" width="70"></li>
+                            <li><img onclick="changeImage(this)" src="{{product.image2.url}}" width="70"></li>
+                            <li><img onclick="changeImage(this)" src="{{product.image3.url}}" width="70"></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 right-side">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3>{{product.name}}</h3>
+                    </div>
+                    <div class="mt-2 pr-3 content">
+                        <p class="fs-6">{{product.description}}</p>
+                    </div>
+                    <h3>฿{{product.price | intcomma}}</h3>
+                    <p class="fs-5 mt-3">📍{{product.period}}</p>
+                    <p class=" mt-3">จำนวนสินค้าที่มี <b>{{product.stock}}</b></p>
+                    <p style="color: rgb(97, 97, 97);">หมวดหมู่ {{product.category}}</p>
+                    
+                    <div class="buttons d-flex flex-row mt-5 gap-3"> 
+                        {% if product.stock <= 0 %}
+                        <h5 class="text-danger">สินค้าหมด</h5>
+                        {% else %}
+                            {% if request.user.is_authenticated and request.user.first_name %}
+                            <a href="{%url 'addCart' product.id %}"><button class="btn btn-danger">เพิ่มลงตะกร้า</button></a>
+                            {% else %}
+                            <a href="{%url 'login'%}"><button class="btn btn-danger">เพิ่มลงตะกร้า</button></a>
+                            {% endif %}
+                        {% endif %}
+                        <!-- {% if product.stock <= 0 %}
+                        <h5 class="text-danger">สินค้าหมด</h5>
+                        {% else %}
+                        <a href="{%url 'addCart' product.id %}" class="btn btn-primary">เพิ่มลงตะกร้า</a>
+                        {% endif %} -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

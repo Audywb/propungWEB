@@ -1,0 +1,23 @@
+{% extends "promo/layouts.html" %}
+{% load static %}
+
+{% block title %}ขอบคุณ{% endblock %} 
+{% block content %}
+
+<section>
+<div class="container mt-5 mb-5">
+    <div class="jumbotron text-center">
+        <h1 class="display-3">ดำเนินการชำระเงินเรียนร้อยแล้ว</h1>
+        <p class="lead"><strong>รอการติดต่อกลับทางอีเมลล์จากเรา</strong> สถานะการณ์จัดส่งจะแจ้งเตือนผ่านอีเมลล์เมื่อผู้รับหิ้วจัดส่งสินค้าสำเร็จ</p>
+        <hr>
+        <p>
+          ฝากหิ้วสินค้ากับเราต่อ <a  href="{% url 'preorder' %}">หน้าฝากหิ้ว</a>
+        </p>
+        <p class="lead">
+          <a class="btn btn-danger btn-sm" href="{% url 'orderHistory' %}" role="button">รายการฝากหิ้ว</a>
+        </p>
+      </div>
+</div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends "promo/layouts.html" %}
+{% load static %}
+{% load humanize %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js></script"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+{% endblock %}
+{% block title %}ประวัติการฝากหิ้ว{% endblock %} 
+{% block content %}
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    $(document).ready(function() {
+        $('#example2').DataTable();
+    } );
+</script>
+
+<section>
+<div class="container mt-5 mb-5">
+    <h2 class="text-center fs-4">รายการสินค้าที่ได้รับหิ้ว</h2>
+    {% if not orders %}
+        <div class="alert alert-danger my-2" role="alert">
+            <b>ไม่มีประวัติการสั่งซื้อสินค้า</b>
+        </div>
+    {%else%}
+    <div class="container mt-4">
+        <h5>รหัสรายการฝากหิ้วของคุณ</h5>
+        <div class="row alert alert-info">
+        {% for item in orders %}
+          <div class="col">
+            {{item.id}}
+          </div>
+        {%endfor%}
+        </div>
+      </div>
+      <br>
+      <br>
+      <h2 class="text-center fs-4">ตารางรายการสินค้ารับหิ้ว</h2>
+      <div class="table-responsive">
+        <table id="example" class="table table-striped">
+            <thead>
+                <tr class="cart_menu">
+                    <td>รหัสใบฝากหิ้ว</td>
+                    <td>ชื่อสินค้า</td>
+                    <td>ราคาสินค้า</td>
+                    <td>จำนวนสินค้า</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in OrderItem %}
+                <tr>
+                    <td class="cart_total">
+                        <p>{{item.order}}</p>
+                    </td>
+                    <td class="cart_total">
+                        <p>{{item.product}}</p>
+                    </td>
+                    <td class="cart_price">
+                        <p>{{item.price}}</p>
+                    </td>
+                    <td class="cart_total">
+                        <p>{{item.quantity}}</p>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <h2 class="text-center fs-4">ตารางข้อมูลลูกค้าที่ฝากหิ้ว</h2>
+    <div class="table-responsive">
+        <table id="example2" class="table table-striped">
+            <thead>
+                <tr class="cart_menu">
+                    <td>รหัสใบฝากหิ้ว</td>
+                    <td>ชื่อลูกค้า</td>
+                    <td>วันที่ฝากหิ้ว</td>
+                    <td>ที่อยู่ลูกค้า</td>
+                    <td>จังหวัด</td>
+                    <td>รหัสไปษณีย์</td>
+                    <td>จำนวนเงิน</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order %}
+                <tr>
+                    <td class="cart_price">
+                        <p>{{item.id}}</p>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price">{{item.name}}</p>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price">{{item.created|date:"d/m/Y H:i น."}}</p>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price">{{item.address}}</p>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price">{{item.city}}</p>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price">{{item.postcode}}</p>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price">{{item.total}}</p>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+</div>
+</section>
+
+{% endblock %}

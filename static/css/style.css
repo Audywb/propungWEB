@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+
+*{
+  font-family: 'Prompt', sans-serif;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+
+.text-underline-hover {
+  text-decoration: none;
+}
+
+.text-underline-hover:hover {
+  text-decoration: underline;
+}
+
+a:not([class]) {
+  text-decoration: none;
+}
+
+a:not([class]):hover {
+  text-decoration: underline;
+}  */
+
+body{
+    background-color: rgb(255, 255, 255);
+    font-family: 'Prompt', sans-serif;
+}
+
+.text-center{
+  font-family: 'Prompt', sans-serif;
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.h-custom {
+  height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}
+
+div.ex2 {
+  background-color: lightblue;
+  width: auto;
+  height: 110px;
+  overflow: hidden;
+}
+
+img {
+  object-fit: contain;
+}

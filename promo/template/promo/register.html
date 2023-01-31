@@ -1,0 +1,52 @@
+{% extends "promo/layouts.html" %}
+
+    {% block title %}สมัครสมาชิก{% endblock %} 
+    {% block content %}
+    {% load static %}
+    {% load crispy_forms_tags %}
+      <!-------------------------------------------------------->
+
+      <!-- Login form -->
+      <section class="vh-100">
+        <div class="container-fluid h-custom">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+              <img src="https://www.img.in.th/images/58dc85500b468ad0e602fd3526cec080.png" class="img-fluid"
+                alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1"><br><br><br><br>
+              <form method="post">
+                <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                  <!-- <p class="lead fw-normal mb-0 me-3">Sign up with</p>
+                  <button type="button" class="btn btn-danger btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+      
+                  <button type="button" class="btn btn-danger btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+      
+                  <button type="button" class="btn btn-danger btn-floating mx-1">
+                    <i class="fab fa-linkedin-in"></i>
+                  </button> -->
+                </div>
+                {% csrf_token %}
+                {{form | crispy}}
+
+      
+                <div class="d-flex justify-content-between align-items-center">
+                  
+                <div class="text-center text-lg-start mt-4 pt-2">
+                  <button type="submit" class="btn btn-danger btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Sing up</button>
+                </div>
+      
+              </form>
+              
+            </div>
+          </div>
+        </div>
+         <br><br>
+      </section>
+      <!-- {{form | crispy}} -->
+{% endblock %}
